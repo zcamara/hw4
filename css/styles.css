@@ -1,0 +1,206 @@
+/* Google web fonts 'Open Sans' (italic and normal) and 'Boogaloo' */
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700);
+@import url(http://fonts.googleapis.com/css?family=Sancreek);
+
+#homePage {
+	background-image: url(../img/pizza1.jpg);
+}
+
+#pizzamenu {
+	background-image: url(../img/pizza-oven3.jpg);
+}
+
+#aboutpage {
+	background-image: url(../img/pizza-oven2.jpg);
+}
+
+body {
+	padding-top: 0px;
+	padding-bottom: 70px;
+	height: 100%;
+	background: no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.menu-ui {
+	text-align: center;
+}
+
+.navbar {
+	border-bottom: 2px solid #000;
+	background: rgba(255, 255, 255, 0.5);
+}
+
+.motto {
+	text-align: center;
+}
+
+.template {
+	display: none;
+}
+
+.maincontainer {
+	border-radius: 50px;
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 1px 1px 1px #000;
+	border: 5px solid #000; 
+	background-image: url(../img/subtle_white_feathers.png);
+	overflow: auto;
+	opacity: .9;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;
+}
+
+#aboutpage .maincontainer {
+	width: 40%;
+	margin-left: 48%;
+}
+
+#small {
+	width: 40%;
+}
+
+#small dd {
+	text-align: center;
+}
+
+#small dt {
+	text-align: center;
+}
+
+.maincontainer:hover {
+	opacity: 1;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-o-transition: all 1s;
+	-ms-transition: all 1s;
+	transition: all 1s;
+}
+
+h2 {
+	text-align: center;
+	padding-bottom: 1em;
+}
+
+.menu-ui {
+	padding-bottom: 1em;
+}
+
+iframe {
+	display: block;
+	margin: 0 auto;
+	border: 0;
+	padding-bottom: 1em;
+}
+
+#foot {
+	border: none;
+	margin-top: 80px;
+	background-color: #000;
+}
+
+.pizzainfo {
+	font-weight: bold;
+	color: #9865CD;
+	background-color: #FFEC00;
+	border: 2px solid #9865CD;
+	padding: 5px;
+	margin-bottom: 1em;
+}
+
+footer div p {
+	font-size: 90%;
+	font-style: italic;
+	color: #FFEC00 !important;
+}
+
+dl img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	height: 50%;
+}
+
+@media screen and (max-width: 768px) {
+
+	dl img {
+		width: 240px;
+		height: 71px;
+	}
+
+	iframe {
+		width: 200px;
+		height: 150px;
+	}
+
+	.maincontainer {
+		width: 99%;
+		opacity: 1;
+	}
+
+	#aboutpage .maincontainer {
+		margin-right: auto;
+		margin-left: auto;
+		width: 99%;
+	}
+
+	#small {
+	width: 80%;
+}
+}
+
+.twitter-follow-button {
+	margin: 0px;
+	height: 50px !important;
+}
+
+.navbar-brand {
+	background-image: url(../img/logo-small.png);
+	background-repeat: no-repeat;
+	margin-top: 5px;
+	margin-left: 5px;
+	padding-right: 200px;
+	padding-bottom: 30px;
+}
+
+dd {
+	font-style: italic;
+}
+
+h3:first-letter {
+	text-transform:capitalize;
+}
+
+h3 {
+	text-align: center;
+}
+
+
+/* title */
+.navbar-default .navbar-brand {
+    color: #FFF;
+}
+/* link */
+.navbar-default .navbar-nav > li > a {
+	font-weight: bold;
+    color: #000;
+}
+.navbar-default .navbar-nav > li > a:hover {
+    color: #000;
+    background-color: #FFEC00;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > .active > a:focus {
+	color: #000;
+	background-color: #FFEC00;
+}

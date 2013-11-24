@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="author" content="1124687">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="img/pizza_1.png">
+		<title>Dawg Pizza Menu</title>
+
+		<link href="dist/css/bootstrap.css" rel="stylesheet">
+
+		<link href="css/styles.css" rel="stylesheet">
+
+	</head>
+
+	<body id="pizzamenu">
+
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="index.html"></a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="index.html">Home</a></li>
+						<li class="active"><a href="menu.html">Menu</a></li>
+						<li><a href="about.html">About</a></li>
+					</ul>
+				</div><!--/.nav-collapse -->
+			</div>
+		</nav>
+
+		<div class="container maincontainer">
+			<h2>Dawg Pizza Menu</h2>
+
+			<!-- Menu selector  -->
+			<div class="menu-ui">
+				<div class="btn-group">
+					<button type="button" class="btn btn-default active" data-type="pizzas">Pizza</button>
+					<button type="button" class="btn btn-default" data-type="drinks">Drink</button>
+					<button type="button" class="btn btn-default" data-type="desserts">Dessert</button>
+				</div>
+			</div>
+
+			<h3 class="menuType">Pizzas:</h3>
+
+			<div class="menu">
+			</div>
+
+			<div class="pizza-menu">
+				<p>All of our pizzas are made with hand-thrown crust, baked in real wood ovens. Choose from one of these sizes:</p>
+				<ul>
+					<li>Small (12")</li>
+					<li>Medium (14")</li>
+					<li>Large (17")</li>
+				</ul>
+				<div class="pizzainfo">
+					All pizzas can be customized--add a few ingredients, or take a few off--for an extra $2.
+				</div>
+			
+				<div class="row">
+					<div class="col-md-6">
+						<h4>Meat Pies:</h4>
+						<dl class="meat-pizza">
+						</dl>
+					</div>
+					<div class="col-md-6">
+						<h4>Vegetarian Pies:</h4>
+						<dl class="veggie-pizza">
+						</dl>
+					</div>
+				</div>
+			</div>
+
+			<!-- template card for each entry
+             this will not be displayed, only used by code -->
+			<dl class="pizza template">
+				<dt class="pizzaname"></dt>
+				<dd class="description"></dd>
+				<dd class="prices"></dd>
+			</dl>
+
+			<dl class="template">
+				<dt class="name"></dt>
+				<dd class="price"></dd>
+			</dl>			
+
+		</div> <!-- /container -->
+
+
+		<footer class = "navbar navbar-default navbar-fixed-bottom" id="foot">
+			<div class = "container">
+				<p class = "navbar-text pull-left">© Dawg Pizza 2013</p>
+				<p class = "navbar-text pull-right">Call us: 206-555-1212</p>
+			</div>
+		</footer>
+
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="assets/js/jquery.js"></script>
+		<script src="dist/js/bootstrap.min.js"></script>
+
+		<!-- direct link to menu script -->
+		<script src="js/menu.js"></script>
+		<!-- my own JavaScript file, which will use the menu data structure -->
+		<script src="js/menu-generator.js"></script>
+	</body>
+</html>
