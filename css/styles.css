@@ -29,8 +29,8 @@ body {
   	background-size: cover;
 }
 
-.pizza-menu {
-	text-align: center !important;
+.pizza-order-menu {
+	text-align: center;
 }
 
 .menu-ui {
@@ -114,7 +114,7 @@ body {
 	border: 1px solid #000;
 	padding: 20px;
 	border-radius: 25px;
-	width: 330px;
+	width: 340px;
 }
 
 .signup-form {

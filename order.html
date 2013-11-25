@@ -49,7 +49,7 @@
 							<li>Medium (14")</li>
 							<li>Large (17")</li>
 						</ul>
-						<div class="pizza-menu">
+						<div class="pizza-order-menu">
 							<h4>Meat Pies:</h4>
 							<dl class="meat-pizza">
 							</dl>
@@ -112,15 +112,32 @@
 	                    <div class="cart-container"></div>
 	                    <div class="cart-footer">
 	                        <div class="row total-row">
-	                            <div class="col-xs-10">
-	                                Total:
+	                            <div class="col-xs-9">
+	                                Subtotal:
 	                            </div>
-	                            <div class="col-xs-2">
-	                                $<span class="total-price"></span>
+	                            <div class="col-xs-3">
+	                                $<span class="subtotal-price"></span>
+	                            </div>
+	                        </div>
+	                        <div class="row">
+	                            <div class="col-xs-9">
+	                                Tax (9.5%):
+	                            </div>
+	                            <div class="col-xs-3">
+	                                $<span class="tax-price"></span>
+	                            </div>
+	                        </div>
+	                        <div class="row total-row">
+	                            <div class="col-xs-9">
+	                                <b>Grand Total:</b>
+	                            </div>
+	                            <div class="col-xs-3">
+	                                <b>$</b><span class="total-price"></span>
 	                            </div>
 	                        </div>
 	                        <div class="row">
 	                            <div class="col-xs-12 button-row">
+	                            	 <button type="button" class="btn btn-primary start-over">Start Over</button>
 	                                <button type="button" class="btn btn-primary place-order">Place My Order</button>
 	                            </div>
 	                        </div>                        

@@ -4,8 +4,8 @@ $(function(){
 	 $("#cartbox").sticky({topSpacing:50});
 	//Display pizza menu
 	renderPizza();
-	render("drinks");
-	render("desserts");
+	render("drink");
+	render("dessert");
 	
 //create a cart model as a simple object with
     //the properties we eventually need to post to
@@ -18,6 +18,19 @@ $(function(){
         items: [] //empty array
     }; //cart data
 
+    //Holds total cost globally for later tests
+    var totalCost = 0;
+
+    $('.start-over').click(function(event) {
+	    var cont = confirm('Are you sure you want to empty the cart?');
+	    if(cont) {
+	        cart.items = []; //make cart empty
+			renderCart(cart, $('.cart-container')); //rerender empty cart
+	        return true;
+	    }
+	    // If cancel was clicked button execution will be halted.
+	    event.preventDefault();
+	});
 
     //click event handler for all buttons with the
     //style class 'add-to-cart'
@@ -33,33 +46,35 @@ $(function(){
 	            price: this.getAttribute('data-price'),
 	            quantity: 1
 	        };
-
-
-	        //push the new item on to the items array
-	        var quantity = $.inArray(newCartItem, cart.items);
-	        console.log(newCartItem);
-	        console.log(cart.items)
-	        if(contains(cart.items, newCartItem.name)) 
-	        	alert(yay);
-	        else 
-	        	cart.items.push(newCartItem);
-	        
-	        
-
-
-	        //render the cart's contents to the element
-	        //we're using to contain the cart information
-	        //note that you would need a <div> or some
-	        //other grouping element on the page that has a
-	        //style class of 'cart-container'
-	        renderCart(cart, $('.cart-container'));
-	        console.log(cart.items)
+	        var index = pizzaLookup(cart.items, newCartItem.name, newCartItem.size);
+	    } else {
+	    	var newCartItem = {
+	            type: this.getAttribute('data-type'),
+	            name: this.getAttribute('data-name'),
+	            price: this.getAttribute('data-price'),
+	            quantity: 1
+	        };
+	        var index = lookup(cart.items, newCartItem.name);
 	    }
+
+	    
+		//push the new item on to the items array
+		
+		if(index === -1) //Not already in array
+			cart.items.push(newCartItem);
+		else //Already in array, let's modify quantity
+			cart.items[index].quantity += 1;
+		//render the cart's contents to the element
+		//we're using to contain the cart information
+		//note that you would need a <div> or some
+		//other grouping element on the page that has a
+		//style class of 'cart-container'
+		renderCart(cart, $('.cart-container'));
     });
 
 
     $('.place-order').click(function(){
-        
+        alert("yo");
         //TODO: validate the cart to make sure all the required
         //properties have been filled out, and that the 
         //total order is greater than $20 (see homework 
@@ -72,13 +87,19 @@ $(function(){
 
 }); //doc ready
 
-function contains(a, obj) {
-    for (var i = 0; i < a.length; i++) {
-        if (a[i].name === obj.name) {
-            return true;
-        }
-    }
-    return false;
+//Finds items by name in the cart array and returns the index. Returns -1 if not found
+function lookup(cart, newName) {
+	for (var i = 0; i < cart.length; i++)
+		if (cart[i].name === newName) return i;
+	return -1;
+}
+
+function pizzaLookup(cart, newName, newSize) {
+	for (var i = 0; i < cart.length; i++)
+		if (cart[i].name === newName) {
+			if(cart[i].size === newSize) return i;
+		}
+		return -1;
 }
 
 //renders the pizza menu
@@ -104,21 +125,21 @@ function renderPizza(){
 			'data-name': pizza.name,
 			'data-size': "Small",
 			'data-price': pizza.prices[0]
-        });
+		});
 		instance.find('.mediumprice').html(pizza.prices[1]);
 		instance.find('.medium-pizza').attr({
 			'data-type': "Pizza",
 			'data-name': pizza.name,
 			'data-size': "Medium",
 			'data-price': pizza.prices[1]
-        });
+		});
 		instance.find('.largeprice').html(pizza.prices[2]);
 		instance.find('.large-pizza').attr({
 			'data-type': "Pizza",
 			'data-name': pizza.name,
 			'data-size': "Large",
 			'data-price': pizza.prices[2]
-        });
+		});
 		instance.removeClass('pizza-template');
 		if (pizza.vegetarian)
 			var container = veggieContainer;
@@ -126,7 +147,6 @@ function renderPizza(){
 			var container = meatContainer;
 		container.append(instance);
 	}
-	pizzaContainer.fadeIn(500);
 }
 
 //Renders drink and dessert menus
@@ -138,7 +158,7 @@ function render(type) {
 	var item;
 	//Add small id so container shrinks
 	var address = com.dawgpizza.menu.drinks;
-	if (type === "desserts") {
+	if (type === "dessert") {
 		address = com.dawgpizza.menu.desserts;
 		container = $('.dessert-menu')
 	}
@@ -147,21 +167,14 @@ function render(type) {
 		instance = template.clone();
 		instance.find('.name').html(item.name);
 		instance.find('.itemprice').html(item.price);
+		instance.find('.item').attr({
+			'data-type': type,
+			'data-name': item.name,
+			'data-price': item.price
+        });
 		instance.removeClass('template');
 		container.append(instance);
 	}
-	container.fadeIn(500);
-}
-
-//Empties the menu for recreation
-function clearMenu() {
-	$('.pizza-menu').hide();
-	$('.meat-pizza').empty();
-	$('.veggie-pizza').empty();
-	$('.menu').empty();
-	$('.menu').hide();
-	$('.menuType').hide();
-	$('.menuType').fadeIn(500);
 }
 
 // renderCart()
@@ -177,27 +190,32 @@ function renderCart(cart, container) {
     //empty the container of whatever is there currently
     container.empty();
 
+    var subTotal = 0;
 
     //for each item in the cart...
     for (idx = 0; idx < cart.items.length; ++idx) {
         item = cart.items[idx];
         instance = template.clone();
-        instance.find('.name').html(item.quantity + ": "+ item.name);
-		instance.find('.price').html(item.price);
+        var itemSubTotal = item.price * item.quantity;
+        instance.find('.name').html("["+item.quantity+"] : "+ item.name);
+		instance.find('.price').html(itemSubTotal);
 		if(item.size)
 			instance.find('.size').html("("+item.size+")");
 		instance.removeClass('cart-item-template');
+		subTotal += itemSubTotal;
 		container.append(instance);
-
-
     } //for each cart item
 
 
-    //TODO: code to render sub-total price of the cart
+    //code to render sub-total price of the cart
+    $('.subtotal-price').html(subTotal);
     //the tax amount (see instructions), 
+    var tax = subTotal * .095;
+    $('.tax-price').html(tax.toFixed(2));
     //and the grand total
-
-
+    totalCost = subTotal + tax; //Save this for later
+    totalCost = totalCost.toFixed(2);
+    $('.total-price').html(totalCost);
 } //renderCart()
 
 
