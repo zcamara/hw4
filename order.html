@@ -68,7 +68,8 @@
 					</div>
 				</div>
 				<div class="col-md-6">
-			<!-- Customer Order Form  -->
+
+					<!-- Customer Order Form  -->
 		            <form method="POST" action="https://courses.washington.edu/info343/signup/" class="form-horizontal signup-form" role="form">
 
 
@@ -105,14 +106,29 @@
 		                    </div>
 		                </div>
 
-		                <div class="row">
-		                    <div class="col-lg-12 text-right">
-		                        <button type="button" class="btn btn-default cancel-signup">No Thanks!</button>
-		                        <button type="submit" class="btn btn-primary">Sign Me Up!</button>
-		                    </div>
-		                </div>
-
 		            </form>
+
+					<div class="cartbox" id="cartbox">
+
+	                    <h2>Your Cart</h2>
+	                    <div class="cart-container"></div>
+	                    <div class="cart-footer">
+	                        <div class="row total-row">
+	                            <div class="col-xs-10">
+	                                Total:
+	                            </div>
+	                            <div class="col-xs-2">
+	                                $<span class="total-price"></span>
+	                            </div>
+	                        </div>
+	                        <div class="row">
+	                            <div class="col-xs-12 button-row">
+	                                <button type="button" class="btn btn-primary place-order">Place My Order</button>
+	                            </div>
+	                        </div>                        
+	                    </div>
+	                </div>
+			
 				</div>
 			</div>
 
@@ -141,6 +157,18 @@
 				</dd>
 			</dl>			
 
+			<!-- cart item template -->
+			<div class="cart-item-template cart-item row">
+				<div class="col-xs-10">
+					<p><button type="button" class="btn btn-default btn-xs remove-item">&times;</button> 
+						<span class="name"></span> <span class="size"></span>
+					</p>
+				</div>
+				<div class="col-xs-2 col-price">
+					<p>$<span class="price"></span></p>
+				</div>
+			</div>
+
 		</div> <!-- /container -->
 
 
@@ -161,6 +189,8 @@
 		<!-- direct link to menu script -->
 		<script src="js/menu.js"></script>
 		<!-- my own JavaScript file, which will use the menu data structure -->
-		<script src="js/menu-generator.js"></script>
+		<script src="js/order-generator.js"></script>
+
+		<script type="text/javascript" src="js/jquery.sticky.js"></script>
 	</body>
 </html>

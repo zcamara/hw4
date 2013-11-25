@@ -11,7 +11,7 @@
 }
 
 #orderpage {
-	background-image: url(../img/pizza-order.jpg);
+	background-image: url(../img/pizza-order2.jpg);
 }
 
 #aboutpage {
@@ -80,6 +80,14 @@ body {
 	text-align: center;
 }
 
+.menu {
+	text-align: center;
+}
+
+.cart-item-template {
+	display: none;
+}
+
 .maincontainer:hover {
 	opacity: 1;
 	-webkit-transition: all 1s;
@@ -87,6 +95,17 @@ body {
 	-o-transition: all 1s;
 	-ms-transition: all 1s;
 	transition: all 1s;
+}
+
+.cartbox {
+	border: 1px solid #000;
+	padding: 20px;
+	border-radius: 25px;
+	width: 330px;
+}
+
+.signup-form {
+	padding-bottom: 10px;
 }
 
 h2 {
@@ -97,6 +116,20 @@ h2 {
 .menu-ui {
 	padding-bottom: 1em;
 }
+
+.total-price {
+    font-weight: bold;
+}
+
+.total-row {
+    border-top: 1px solid #AAA;
+}
+
+.button-row {
+    margin-top: 2em;
+    text-align: right;
+}
+
 
 iframe {
 	display: block;

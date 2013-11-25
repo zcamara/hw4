@@ -29,7 +29,6 @@ function renderPizza(){
 	var meatContainer = $('.meat-pizza');
 	var veggieContainer = $('.veggie-pizza');
 	var pizzaContainer = $('.pizza-menu');
-	$('.pizzabutton').show();
 	//remove small id so container expands
 	$('.maincontainer').removeAttr('id');
 	for (idx = 0; idx < com.dawgpizza.menu.pizzas.length; ++idx) {
@@ -38,9 +37,6 @@ function renderPizza(){
 		instance.find('.pizzaname').html(pizza.name);
 		instance.find('.description').html(pizza.description);
 		instance.find('.prices').html("$"+pizza.prices[0]+" $"+pizza.prices[1]+" $"+pizza.prices[2]);
-		instance.find('.smallprice').html(pizza.prices[0]);
-		instance.find('.mediumprice').html(pizza.prices[1]);
-		instance.find('.largeprice').html(pizza.prices[2]);
 		instance.removeClass('template');
 		if (pizza.vegetarian)
 			var container = veggieContainer;
@@ -68,7 +64,6 @@ function render(type) {
 		instance = template.clone();
 		instance.find('.name').html(item.name);
 		instance.find('.price').html("$" + item.price)
-		instance.find('.itemprice').html(item.price);
 		instance.removeClass('template');
 		container.append(instance);
 	}
@@ -77,7 +72,6 @@ function render(type) {
 
 //Empties the menu for recreation
 function clearMenu() {
-	$('.pizzabutton').hide();
 	$('.pizza-menu').hide();
 	$('.meat-pizza').empty();
 	$('.veggie-pizza').empty();
