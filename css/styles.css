@@ -115,6 +115,8 @@ body {
 	padding: 20px;
 	border-radius: 25px;
 	width: 340px;
+	background: rgba(97, 97, 97, 0.99);
+	color: #FFF;
 }
 
 .signup-form {

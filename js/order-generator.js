@@ -135,6 +135,7 @@ $(function(){
 		document.getElementById('zip').value=storedZip;
 	if(storedPhone)
 		document.getElementById('phone').value=storedPhone;
+	renderCart(cart, $('.cart-container')); //Populate totals
 
 }); //doc ready
 
