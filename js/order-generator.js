@@ -3,7 +3,10 @@ var required = ["name","address1","zip","phone"];
 //On load
 $(function(){ 
 	//Make cart follow scrolling 
-	 $("#cartbox").sticky({topSpacing:50});
+	if (document.documentElement.clientWidth > 768 ) {
+    	$("#cartbox").sticky({topSpacing:50});
+	}
+	 
 	//Display pizza menu
 	renderPizza();
 	render("drink");
