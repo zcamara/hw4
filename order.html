@@ -67,10 +67,9 @@
 				</div>
 				<div class="col-md-6">
 
-					<!-- Customer Order Form  -->
-		            <form method="POST" action="https://courses.washington.edu/info343/signup/" class="form-horizontal signup-form" role="form">
-
-
+					<!-- Customer Order Form !-->
+                    <form method="POST" action="http://dawgpizza.com/orders/" class="form-horizontal cart-form" role="form" id="cartform">
+                    <input type="hidden" name="cart">
 		                <div class="form-group">
 		                    <label class="col-lg-2 control-label" for="name">Name</label>
 		                    <div class="col-lg-10">
@@ -81,7 +80,6 @@
 		                    <label class="col-lg-2 control-label" for="address1">Address</label>
 		                    <div class="col-lg-10">
 		                        <input type="text" class="form-control" name="address1" id="address1" placeholder="street address">
-		                        <input type="text" class="form-control" name="address2">
 		                    </div>
 		                </div>
 
@@ -91,7 +89,7 @@
 		                    <div class="col-lg-10">
 		                        <div class="row">
 		                            <div class="col-lg-5">
-		                                <input type="text" class="form-control" name="zip" placeholder="zip code">
+		                                <input type="text" class="form-control" name="zip" id="zip" placeholder="zip code">
 		                            </div>
 		                        </div>
 		                    </div>
@@ -140,6 +138,8 @@
 	                            	 <button type="button" class="btn btn-primary start-over">Start Over</button>
 	                                <button type="button" class="btn btn-primary place-order">Place My Order</button>
 	                            </div>
+	                            <br>
+	                            <p>Free delivery as long as the <b>$20</b> minimum is met</p>
 	                        </div>                        
 	                    </div>
 	                </div>
@@ -175,7 +175,7 @@
 			<!-- cart item template -->
 			<div class="cart-item-template cart-item row">
 				<div class="col-xs-10">
-					<p><button type="button" class="btn btn-default btn-xs remove-item">&times;</button> 
+					<p><button type="button" id="remove-item" class="btn btn-default btn-xs remove-item">&times;</button> 
 						<span class="name"></span> <span class="size"></span>
 					</p>
 				</div>
@@ -207,5 +207,6 @@
 		<script src="js/order-generator.js"></script>
 
 		<script type="text/javascript" src="js/jquery.sticky.js"></script>
+		<script type="text/javascript" src="js/jquery.cookie.js"></script>
 	</body>
 </html>

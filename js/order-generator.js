@@ -1,3 +1,5 @@
+var required = ["name","address1","zip","phone"];
+
 //On load
 $(function(){ 
 	//Make cart follow scrolling 
@@ -15,11 +17,9 @@ $(function(){
         address1: null,
         zip: null,
         phone: null,
+        nextUrl: 'http://students.washington.edu/zcamara/info343/hw4/',
         items: [] //empty array
     }; //cart data
-
-    //Holds total cost globally for later tests
-    var totalCost = 0;
 
     $('.start-over').click(function(event) {
 	    var cont = confirm('Are you sure you want to empty the cart?');
@@ -38,7 +38,7 @@ $(function(){
         //use the attributes on the button to construct
         //a new cart item object that we can add to the
         //cart's items array
-        if (this.getAttribute('data-type') === "Pizza") {
+        if (this.getAttribute('data-type') === "pizza") {
 	        var newCartItem = {
 	            type: this.getAttribute('data-type'),
 	            name: this.getAttribute('data-name'),
@@ -72,18 +72,69 @@ $(function(){
 		renderCart(cart, $('.cart-container'));
     });
 
+	//click handler for remove button
+	$(document).on('click', '.remove-item', function() {
+		var idxToRemove = this.getAttribute('data-index');
+	    cart.items.splice(idxToRemove, 1);
+		renderCart(cart, $('.cart-container'));
+	});
+
 
     $('.place-order').click(function(){
-        alert("yo");
-        //TODO: validate the cart to make sure all the required
+        //validate the cart to make sure all the required
         //properties have been filled out, and that the 
         //total order is greater than $20 (see homework 
         //instructions) 
+    	var total = $('.total-price').html();
+    	var formComplete = true;
 
+    	if (!total) {
+    		alert('The shopping cart is empty! Pick some of our delicous pizza');
+    		formComplete = false;
+    	}
 
-        postCart(cart, $('.cart-form'));
+    	if(total < 20  && total) {
+    		alert('Our delivery minimum is $20. Your total is currently: $'+total);
+	    	formComplete = false;
+    	}
+
+    	if(formComplete) {
+    		var warning = "";
+    		$.each(required, function(){
+	    		req = $('input[name='+this+']').val().trim();
+	    		if (req.length === 0) {
+	    			//required field has no value
+	    			warning += " "+this;
+	    			formComplete = false;
+	    		} else {
+	    			cart[this] = req;
+	    		}
+	    	});
+	    	if(warning != "")
+	    		alert('Fill out the following field(s): '+warning+'');
+
+    		if(formComplete) {
+    			$.cookie("name", cart.name);
+    			$.cookie("address1", cart.address1);
+    			$.cookie("zip", cart.zip);
+    			$.cookie("phone", cart.phone);
+				postCart(cart, $('.cart-form'));
+    		}
+    	}
     });
 
+	var storedName = $.cookie("name");
+	var storedAddress = $.cookie("address1");
+	var storedZip = $.cookie("zip");
+	var storedPhone = $.cookie("phone");
+	if(storedName)
+		document.getElementById('name').value=storedName;
+	if(storedAddress)
+		document.getElementById('address1').value=storedAddress;
+	if(storedZip)
+		document.getElementById('zip').value=storedZip;
+	if(storedPhone)
+		document.getElementById('phone').value=storedPhone;
 
 }); //doc ready
 
@@ -121,23 +172,23 @@ function renderPizza(){
 		//add attributes for pizza and format so we know
         //which pizza and size to add to the user's cart
 		instance.find('.small-pizza').attr({
-			'data-type': "Pizza",
+			'data-type': "pizza",
 			'data-name': pizza.name,
-			'data-size': "Small",
+			'data-size': "small",
 			'data-price': pizza.prices[0]
 		});
 		instance.find('.mediumprice').html(pizza.prices[1]);
 		instance.find('.medium-pizza').attr({
-			'data-type': "Pizza",
+			'data-type': "pizza",
 			'data-name': pizza.name,
-			'data-size': "Medium",
+			'data-size': "medium",
 			'data-price': pizza.prices[1]
 		});
 		instance.find('.largeprice').html(pizza.prices[2]);
 		instance.find('.large-pizza').attr({
-			'data-type': "Pizza",
+			'data-type': "pizza",
 			'data-name': pizza.name,
-			'data-size': "Large",
+			'data-size': "large",
 			'data-price': pizza.prices[2]
 		});
 		instance.removeClass('pizza-template');
@@ -201,6 +252,9 @@ function renderCart(cart, container) {
 		instance.find('.price').html(itemSubTotal);
 		if(item.size)
 			instance.find('.size').html("("+item.size+")");
+		instance.find('.remove-item').attr({
+			'data-index': idx
+		});
 		instance.removeClass('cart-item-template');
 		subTotal += itemSubTotal;
 		container.append(instance);
@@ -213,11 +267,10 @@ function renderCart(cart, container) {
     var tax = subTotal * .095;
     $('.tax-price').html(tax.toFixed(2));
     //and the grand total
-    totalCost = subTotal + tax; //Save this for later
+    var totalCost = subTotal + tax;
     totalCost = totalCost.toFixed(2);
     $('.total-price').html(totalCost);
 } //renderCart()
-
 
 // postCart()
 // posts the cart model to the server using
@@ -230,10 +283,6 @@ function postCart(cart, cartForm) {
     //find the input in the form that has the name of 'cart'    
     //and set it's value to a JSON representation of the cart model
     cartForm.find('input[name="cart"]').val(JSON.stringify(cart));
-
-
     //submit the form--this will navigate to an order confirmation page
     cartForm.submit();
-
-
 } //postCart()

@@ -18,6 +18,9 @@ $(function(){
 		$('.menu').fadeIn(500);
 	});
 
+	$('.menu-ui .order-button').click(function(){
+		window.location.href = 'order.html';
+	});
 });
 
 //renders the pizza menu
