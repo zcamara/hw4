@@ -3,7 +3,7 @@ $(function(){
 	//Display pizza menu
 	renderPizza();
 	//Handle button clicks
-	$('.menu-ui .btn').click(function(){
+	$('.menu-ui .btn-default').click(function(){
 		var menuBtn = $(this);
 		var type = menuBtn.attr('data-type');
 		clearMenu();
@@ -18,7 +18,7 @@ $(function(){
 		$('.menu').fadeIn(500);
 	});
 
-	$('.menu-ui .order-button').click(function(){
+	$('.menu-ui .btn-warning').click(function(){
 		window.location.href = 'order.html';
 	});
 });
