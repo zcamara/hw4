@@ -41,30 +41,28 @@
 			<h2>Order Online</h2>
 			<div class="row">
 				<div class="col-md-6">
-					<!-- Menu selector  -->
-					<div class="menu-ui">
-						<div class="btn-group">
-							<button type="button" class="btn btn-default active" data-type="pizzas">Pizza</button>
-							<button type="button" class="btn btn-default" data-type="drinks">Drink</button>
-							<button type="button" class="btn btn-default" data-type="desserts">Dessert</button>
-						</div>
-					</div>
-					<h3 class="menuType">Pizzas:</h3>
-					<div class="pizza-menu">
+					<h3>Pizzas:</h3>
+					<div>
 						<p>All of our pizzas are made with hand-thrown crust, baked in real wood ovens. Choose from one of these sizes:</p>
 						<ul>
 							<li>Small (12")</li>
 							<li>Medium (14")</li>
 							<li>Large (17")</li>
 						</ul>
-						<h4>Meat Pies:</h4>
-						<dl class="meat-pizza">
-						</dl>
-						<h4>Vegetarian Pies:</h4>
-						<dl class="veggie-pizza">
-						</dl>
+						<div class="pizza-menu">
+							<h4>Meat Pies:</h4>
+							<dl class="meat-pizza">
+							</dl>
+							<h4>Vegetarian Pies:</h4>
+							<dl class="veggie-pizza">
+							</dl>
+						</div>
 					</div>
-					<div class="menu">
+					<h3>Drinks:</h3>
+					<div class="drink-menu">
+					</div>
+					<h3>Desserts:</h3>
+					<div class="dessert-menu">
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -134,7 +132,7 @@
 
 			<!-- template card for each entry
              this will not be displayed, only used by code -->
-			<dl class="pizza template">
+			<dl class="pizza-template pizza">
 				<dt class="pizzaname"></dt>
 				<dd class="description"></dd>
 				<button type="button" class="btn btn-default add-to-cart small-pizza pizzabutton">

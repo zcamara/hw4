@@ -1,25 +1,12 @@
 //On load
 $(function(){ 
 	//Make cart follow scrolling 
-	 $("#cartbox").sticky({topSpacing:200});
+	 $("#cartbox").sticky({topSpacing:50});
 	//Display pizza menu
 	renderPizza();
-	//Handle button clicks
-	$('.menu-ui .btn').click(function(){
-		var menuBtn = $(this);
-		var type = menuBtn.attr('data-type');
-		clearMenu();
-		if(type === "pizzas")
-			renderPizza();
-		else
-			render(type);
-		menuBtn.siblings().removeClass("active");
-		menuBtn.addClass("active");
-		//Set Menu title
-		$('.menuType').text(type+":");
-		$('.menu').fadeIn(500);
-	});
-
+	render("drinks");
+	render("desserts");
+	
 //create a cart model as a simple object with
     //the properties we eventually need to post to
     //the server
@@ -38,34 +25,36 @@ $(function(){
         //use the attributes on the button to construct
         //a new cart item object that we can add to the
         //cart's items array
-        var newCartItem = {
-            type: this.getAttribute('data-type'),
-            name: this.getAttribute('data-name'),
-            size: this.getAttribute('data-size'),
-            price: this.getAttribute('data-price'),
-            quantity: 1
-        };
+        if (this.getAttribute('data-type') === "Pizza") {
+	        var newCartItem = {
+	            type: this.getAttribute('data-type'),
+	            name: this.getAttribute('data-name'),
+	            size: this.getAttribute('data-size'),
+	            price: this.getAttribute('data-price'),
+	            quantity: 1
+	        };
 
 
-        //push the new item on to the items array
-        var quantity = $.inArray(newCartItem, cart.items);
-        console.log(newCartItem);
-        console.log(cart.items)
-        if(contains(cart.items, newCartItem.name)) 
-        	alert(yay);
-        else 
-        	cart.items.push(newCartItem);
-        
-        
+	        //push the new item on to the items array
+	        var quantity = $.inArray(newCartItem, cart.items);
+	        console.log(newCartItem);
+	        console.log(cart.items)
+	        if(contains(cart.items, newCartItem.name)) 
+	        	alert(yay);
+	        else 
+	        	cart.items.push(newCartItem);
+	        
+	        
 
 
-        //render the cart's contents to the element
-        //we're using to contain the cart information
-        //note that you would need a <div> or some
-        //other grouping element on the page that has a
-        //style class of 'cart-container'
-        renderCart(cart, $('.cart-container'));
-        console.log(cart.items)
+	        //render the cart's contents to the element
+	        //we're using to contain the cart information
+	        //note that you would need a <div> or some
+	        //other grouping element on the page that has a
+	        //style class of 'cart-container'
+	        renderCart(cart, $('.cart-container'));
+	        console.log(cart.items)
+	    }
     });
 
 
@@ -97,11 +86,10 @@ function renderPizza(){
 	var idx;
 	var pizza;
 	var instance;
-	var template = $('.pizza');
+	var template = $('.pizza-template');
 	var meatContainer = $('.meat-pizza');
 	var veggieContainer = $('.veggie-pizza');
 	var pizzaContainer = $('.pizza-menu');
-	$('.pizzabutton').show();
 	//remove small id so container expands
 	for (idx = 0; idx < com.dawgpizza.menu.pizzas.length; ++idx) {
 		pizza = com.dawgpizza.menu.pizzas[idx];
@@ -131,7 +119,7 @@ function renderPizza(){
 			'data-size': "Large",
 			'data-price': pizza.prices[2]
         });
-		instance.removeClass('template');
+		instance.removeClass('pizza-template');
 		if (pizza.vegetarian)
 			var container = veggieContainer;
 		else
@@ -146,12 +134,14 @@ function render(type) {
 	var idx;
 	var instance;
 	var template = $('.template');
-	var container = $('.menu');
+	var container = $('.drink-menu');
 	var item;
 	//Add small id so container shrinks
 	var address = com.dawgpizza.menu.drinks;
-	if (type === "desserts")
+	if (type === "desserts") {
 		address = com.dawgpizza.menu.desserts;
+		container = $('.dessert-menu')
+	}
 	for (idx = 0; idx < address.length; ++idx) {
 		item = address[idx];
 		instance = template.clone();
@@ -165,7 +155,6 @@ function render(type) {
 
 //Empties the menu for recreation
 function clearMenu() {
-	$('.pizzabutton').hide();
 	$('.pizza-menu').hide();
 	$('.meat-pizza').empty();
 	$('.veggie-pizza').empty();

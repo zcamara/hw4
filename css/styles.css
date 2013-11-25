@@ -29,6 +29,10 @@ body {
   	background-size: cover;
 }
 
+.pizza-menu {
+	text-align: center !important;
+}
+
 .menu-ui {
 	text-align: center;
 }
@@ -43,6 +47,10 @@ body {
 }
 
 .template {
+	display: none;
+}
+
+.pizza-template {
 	display: none;
 }
 
@@ -80,9 +88,14 @@ body {
 	text-align: center;
 }
 
-.menu {
+.drink-menu {
 	text-align: center;
 }
+
+.dessert-menu {
+	text-align: center;
+}
+
 
 .cart-item-template {
 	display: none;
